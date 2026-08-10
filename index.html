@@ -1,12 +1,23 @@
+Here is the updated code reflecting both changes:
+
+Stamp Style: The passport stamp now features a clean, stylized cursive "AI" logo (using the Google Font Caveat).
+
+Click-Triggered Stamp: The stamp starts completely hidden (opacity: 0 and scaled down) and only reveals itself after the learner clicks the "Start Learning" button for that stop.
+
+1. index.html
+Update your index.html to include the new stamp structure inside each action row:
+
+HTML
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>International Roadtrip Scroller</title>
+  <title>International Learning Journey</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -68,13 +79,9 @@
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             
-            <!-- PASSPORT STAMP (Placed next to button) -->
+            <!-- CURSIVE AI PASSPORT STAMP (Revealed on Button Click) -->
             <div class="passport-stamp stamp-coral">
-              <!-- To use your own PNG stamp image instead, uncomment line below: -->
-              <!-- <img src="stamp-paris.png" alt="Visited Paris Stamp" class="stamp-img" /> -->
-              <span class="stamp-title">PASSPORT</span>
-              <span class="stamp-city">PARIS</span>
-              <span class="stamp-status">VISITED</span>
+              <span class="stamp-cursive-ai">AI</span>
             </div>
           </div>
         </section>
@@ -98,9 +105,7 @@
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <div class="passport-stamp stamp-lime">
-              <span class="stamp-title">PASSPORT</span>
-              <span class="stamp-city">LONDON</span>
-              <span class="stamp-status">VISITED</span>
+              <span class="stamp-cursive-ai">AI</span>
             </div>
           </div>
         </section>
@@ -124,9 +129,7 @@
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <div class="passport-stamp stamp-indigo">
-              <span class="stamp-title">PASSPORT</span>
-              <span class="stamp-city">NEW YORK</span>
-              <span class="stamp-status">VISITED</span>
+              <span class="stamp-cursive-ai">AI</span>
             </div>
           </div>
         </section>
@@ -150,9 +153,7 @@
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <div class="passport-stamp stamp-turquoise">
-              <span class="stamp-title">PASSPORT</span>
-              <span class="stamp-city">TOKYO</span>
-              <span class="stamp-status">VISITED</span>
+              <span class="stamp-cursive-ai">AI</span>
             </div>
           </div>
         </section>
@@ -176,9 +177,7 @@
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <div class="passport-stamp stamp-orange">
-              <span class="stamp-title">PASSPORT</span>
-              <span class="stamp-city">SYDNEY</span>
-              <span class="stamp-status">VISITED</span>
+              <span class="stamp-cursive-ai">AI</span>
             </div>
           </div>
         </section>
