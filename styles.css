@@ -1,19 +1,14 @@
-Using custom PNGs or GIFs for the cityscapes is a fantastic approach. An image/GIF asset gives you complete creative freedom over line thickness, detail, and custom branding compared to inline SVG code.
-
-Using an airplane instead of a car also fits the international travel theme far better, making the progression feel like a flight path across stops.
-
-Regarding the iframe issue in Docebo: you are entirely right to be cautious. Full-screen fixed CSS backgrounds can clip unpredictably or cause scrollbar glitches when forced into an iframe. Replacing the screen-wide background with localized, floating blob accents pinned inside the container solves this completely—keeping the design contained while preserving the soft, grainy look.
-
-Here is the updated code reflecting all three changes:
-
-Updated styles.css
-CSS
 :root {
   --text-main: #1f2937;
   --text-muted: #4b5563;
   --polaroid-white: #ffffff;
-  --accent-color: #2563eb;
-  --accent-glow: rgba(171, 185, 255, 0.7);
+  
+  /* Swatches from your color sample palette */
+  --c-coral: #FF4E51;
+  --c-lime: #A2CF00;
+  --c-indigo: #6780FF;
+  --c-turquoise: #23EEBE;
+  --c-orange: #FF6D37;
 }
 
 * {
@@ -25,53 +20,18 @@ CSS
 body {
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
-  background-color: transparent;
+  background-color: transparent; /* 100% transparent */
   color: var(--text-main);
 }
 
-/* Contain everything strictly inside the scroller container */
 .roadtrip-scroller-main {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  overflow: hidden; /* Prevents background blobs from leaking scrollbars into Docebo */
+  background-color: transparent;
 }
 
-/* LOCALIZED GRAINY GRADIENT BLOBS (Contained inside iframe bounds) */
-.blob-accent {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(50px);
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.6;
-}
-
-.blob-1 {
-  top: 5%;
-  left: -50px;
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(circle, #ff86a1 0%, transparent 70%);
-}
-
-.blob-2 {
-  top: 45%;
-  right: -40px;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, #abb9ff 0%, transparent 70%);
-}
-
-.blob-3 {
-  bottom: 5%;
-  left: 10%;
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle, #ffed0e 0%, transparent 70%);
-}
-
-/* NOISE OVERLAY (Contained inside main element) */
+/* NOISE OVERLAY */
 .noise-overlay {
   position: absolute;
   top: 0;
@@ -79,7 +39,7 @@ body {
   width: 100%;
   height: 100%;
   filter: url(#noise);
-  opacity: 0.15;
+  opacity: 0.12;
   pointer-events: none;
   z-index: 10;
 }
@@ -105,7 +65,7 @@ body {
   padding: 80px 40px 150px 70px;
 }
 
-/* ROUTE TRACK & AIRPLANE MARKER */
+/* ROUTE TRACK & PROMINENT CAR */
 .route-track {
   position: absolute;
   top: 100px;
@@ -119,42 +79,35 @@ body {
   top: 0;
   bottom: 0;
   left: 50%;
-  width: 2px;
-  background: repeating-linear-gradient(to bottom, #2563eb 0 8px, transparent 8px 16px);
+  width: 3px;
+  background: repeating-linear-gradient(to bottom, #1f2937 0 8px, transparent 8px 16px);
   transform: translateX(-50%);
 }
 
-/* Airplane Marker Styling */
-.plane-marker {
+.car-marker {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 48px;
-  height: 48px;
-  color: var(--accent-color);
-  background: #ffffff;
-  border: 2px solid var(--accent-color);
-  border-radius: 50%;
-  padding: 8px;
+  width: 54px;
+  height: 90px;
   transform: translate(-50%, -50%);
   transition: top 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15));
 }
 
-.plane-svg {
+.car-svg {
   width: 100%;
   height: 100%;
 }
 
-/* CITY IMAGE / GIF CONTAINER */
-.city-graphic {
+/* LINE ART CITY SKYLINE CONTAINERS */
+.city-skyline-art {
   width: 100%;
-  max-width: 320px;
-  height: auto;
-  max-height: 110px;
-  object-fit: contain;
+  max-width: 380px;
+  height: 80px;
   margin-bottom: 16px;
-  display: block;
+  color: #1f2937;
+  opacity: 0.85;
 }
 
 /* STOP CARDS */
@@ -163,7 +116,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  opacity: 0.3;
+  opacity: 0.25;
   transform: translateY(20px);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
@@ -179,9 +132,15 @@ body {
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--accent-color);
   margin-bottom: 6px;
 }
+
+/* Tag Color Variations */
+.tag-coral { color: var(--c-coral); }
+.tag-lime { color: #6b8800; }
+.tag-indigo { color: var(--c-indigo); }
+.tag-turquoise { color: #00b388; }
+.tag-orange { color: var(--c-orange); }
 
 .stop-card h2 {
   font-size: 2.2rem;
@@ -196,25 +155,54 @@ body {
   margin-bottom: 28px;
 }
 
-/* BUTTONS */
+/* BUTTONS & COLOR VARIATIONS */
 .start-btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   align-self: flex-start;
   padding: 14px 28px;
-  background-color: var(--accent-color);
   color: #ffffff;
   text-decoration: none;
   font-weight: 600;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+.btn-coral {
+  background-color: var(--c-coral);
+  box-shadow: 0 4px 12px rgba(255, 78, 81, 0.3);
+}
+.btn-coral:hover { box-shadow: 0 0 22px rgba(255, 78, 81, 0.6); }
+
+.btn-lime {
+  background-color: var(--c-lime);
+  color: #1f2937;
+  box-shadow: 0 4px 12px rgba(162, 207, 0, 0.3);
+}
+.btn-lime:hover { box-shadow: 0 0 22px rgba(162, 207, 0, 0.6); }
+
+.btn-indigo {
+  background-color: var(--c-indigo);
+  box-shadow: 0 4px 12px rgba(103, 128, 255, 0.3);
+}
+.btn-indigo:hover { box-shadow: 0 0 22px rgba(103, 128, 255, 0.6); }
+
+.btn-turquoise {
+  background-color: var(--c-turquoise);
+  color: #1f2937;
+  box-shadow: 0 4px 12px rgba(35, 238, 190, 0.3);
+}
+.btn-turquoise:hover { box-shadow: 0 0 22px rgba(35, 238, 190, 0.6); }
+
+.btn-orange {
+  background-color: var(--c-orange);
+  box-shadow: 0 4px 12px rgba(255, 109, 55, 0.3);
+}
+.btn-orange:hover { box-shadow: 0 0 22px rgba(255, 109, 55, 0.6); }
+
 .start-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 22px var(--accent-glow);
 }
 
 /* POLAROID STAGE */
@@ -251,7 +239,7 @@ body {
   left: 50%;
   width: 95px;
   height: 28px;
-  background-color: rgba(255, 238, 180, 0.75);
+  background-color: rgba(255, 238, 180, 0.85);
   border: 1px solid rgba(220, 200, 140, 0.4);
   transform: translateX(-50%) rotate(-1.5deg);
   backdrop-filter: blur(2px);
