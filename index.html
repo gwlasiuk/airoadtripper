@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coastal Roadtrip Scroller</title>
+  
+  <!-- Fonts: Inter and Caveat for Polaroid titles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- The main container. We will apply the noise texture overlay to this -->
+  <div class="roadtrip-scroller-main" id="roadtrip-app">
+    
+    <!-- SVG NOISE FILTER OVERLAY -->
+    <!-- This gives the 'grain' look seen in Sample 2, applied over transparency -->
+    <div class="noise-overlay"></div>
+    <svg class="noise-filter" xmlns="http://www.w3.org/2000/svg">
+      <filter id="noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
+        <feColorMatrix type="matrix" values="0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0.9 0" />
+      </filter>
+    </svg>
+
+    <!-- Content Scroller Layout -->
+    <div class="roadtrip-grid">
+      
+      <!-- LEFT SIDE: Content Stream -->
+      <div class="content-stream" id="content-stream">
+        
+        <!-- Vertical Route track with moving Car Icon -->
+        <div class="route-track">
+          <div class="track-line"></div>
+          <div class="car-marker" id="car-marker">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path>
+              <circle cx="7" cy="17" r="2"></circle>
+              <circle cx="17" cy="17" r="2"></circle>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Stop 1: Start -->
+        <section class="stop-card active" data-stop="0" data-image="https://images.unsplash.com/photo-1549241520-425e3dfc01ba?q=80&w=800&h=800&auto=format&fit=crop" data-caption="Route 101 - Departure" data-tilt="left">
+          <span class="city-tag">Stop 01 • Departure</span>
+          <h2>The Journey Begins</h2>
+          <p>Welcome to the learning trip. We start on the open coast road. This first section sets the stage and establishes essential fundamentals before we explore the complexity ahead.</p>
+          <a href="#" target="_blank" class="start-btn">
+            <span>Start Learning</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </section>
+
+        <!-- Stop 2: Redwoods -->
+        <section class="stop-card" data-stop="1" data-image="https://images.unsplash.com/photo-1473448912268-202a19802d99?q=80&w=800&h=800&auto=format&fit=crop" data-caption="Redwood National Park" data-tilt="right">
+          <span class="city-tag">Stop 02 • Redwoods</span>
+          <h2>Navigating the Forest</h2>
+          <p>We are now in the intermediate phase. The content becomes more intricate as we move into practical application, teamwork, and navigating complex systems, just like driving through the coastal giants.</p>
+          <a href="#" target="_blank" class="start-btn">
+            <span>Start Learning</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </section>
+
+        <!-- Stop 3: Big Sur / Coast -->
+        <section class="stop-card" data-stop="2" data-image="https://images.unsplash.com/photo-1469317532191-0268579d40b5?q=80&w=800&h=800&auto=format&fit=crop" data-caption="Big Sur - The Summit" data-tilt="left">
+          <span class="city-tag">Stop 03 • Big Sur</span>
+          <h2>Reaching the Summit</h2>
+          <p>The path becomes steep and refined here. This stop dives deep into advanced strategy, scaling operations, and executing high-impact solutions. Master this, and you finish the journey.</p>
+          <a href="#" target="_blank" class="start-btn">
+            <span>Start Learning</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </section>
+
+      </div>
+
+      <!-- RIGHT SIDE: Polaroid Stage -->
+      <div class="stage-wrapper">
+        <div class="polaroid-card" id="polaroid-card">
+          
+          <!-- Masking Tape Graphic Accent -->
+          <div class="tape-strip"></div>
+          
+          <div class="polaroid-photo-frame">
+            <img class="polaroid-img active" id="photo-a" src="https://images.unsplash.com/photo-1549241520-425e3dfc01ba?q=80&w=800&h=800&auto=format&fit=crop" alt="Current Roadtrip View" />
+            <img class="polaroid-img" id="photo-b" src="https://images.unsplash.com/photo-1473448912268-202a19802d99?q=80&w=800&h=800&auto=format&fit=crop" alt="Incoming Roadtrip View" />
+          </div>
+          
+          <p class="polaroid-caption" id="polaroid-caption">Route 101 - Departure</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
