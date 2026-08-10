@@ -7,10 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const imgA = document.getElementById('photo-a');
   const imgB = document.getElementById('photo-b');
   const caption = document.getElementById('polaroid-caption');
-  const stamp = document.getElementById('passport-stamp');
-  const stampLocation = document.getElementById('stamp-location');
 
-  // Back-face details
+  // Back-face detail elements
   const backTime = document.getElementById('back-time');
   const backReqs = document.getElementById('back-reqs');
   const backTakeaway = document.getElementById('back-takeaway');
@@ -24,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Click-to-Jump Navigation Handler
   trackNodes.forEach((node) => {
-    node.addEventListener('click', (e) => {
+    node.addEventListener('click', () => {
       const jumpIndex = node.getAttribute('data-jump');
       const targetCard = document.getElementById(`stop-${jumpIndex}`);
       if (targetCard) {
@@ -58,14 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
     nextImg.src = newImageSrc;
     activeImg.classList.remove('active');
     nextImg.classList.add('active');
-
-    // Passport Stamp Animation
-    stamp.classList.remove('stamped');
-    setTimeout(() => {
-      const cityName = newCaptionText.split(':')[1]?.split(',')[0]?.trim() || 'VISITED';
-      stampLocation.textContent = cityName;
-      stamp.classList.add('stamped');
-    }, 300);
   }
 
   const observerOptions = {
@@ -86,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
           stopCards.forEach((c) => c.classList.remove('active'));
           card.classList.add('active');
 
-          // Update Track Nodes Active State
+          // Update Track Nodes
           trackNodes.forEach((node, i) => {
             if (i <= activeIndex) {
               node.classList.add('active');
