@@ -1,13 +1,3 @@
-Here is the updated code reflecting both changes:
-
-Stamp Style: The passport stamp now features a clean, stylized cursive "AI" logo (using the Google Font Caveat).
-
-Click-Triggered Stamp: The stamp starts completely hidden (opacity: 0 and scaled down) and only reveals itself after the learner clicks the "Start Learning" button for that stop.
-
-1. index.html
-Update your index.html to include the new stamp structure inside each action row:
-
-HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,9 +69,14 @@ HTML
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             
-            <!-- CURSIVE AI PASSPORT STAMP (Revealed on Button Click) -->
+            <!-- PASSPORT STAMP BADGE -->
             <div class="passport-stamp stamp-coral">
-              <span class="stamp-cursive-ai">AI</span>
+              <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                <path d="M2 12h20"/>
+              </svg>
+              <span class="stamp-text">VISITED</span>
             </div>
           </div>
         </section>
@@ -105,7 +100,12 @@ HTML
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <div class="passport-stamp stamp-lime">
-              <span class="stamp-cursive-ai">AI</span>
+              <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                <path d="M2 12h20"/>
+              </svg>
+              <span class="stamp-text">VISITED</span>
             </div>
           </div>
         </section>
@@ -129,7 +129,12 @@ HTML
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <div class="passport-stamp stamp-indigo">
-              <span class="stamp-cursive-ai">AI</span>
+              <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                <path d="M2 12h20"/>
+              </svg>
+              <span class="stamp-text">VISITED</span>
             </div>
           </div>
         </section>
@@ -153,7 +158,12 @@ HTML
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <div class="passport-stamp stamp-turquoise">
-              <span class="stamp-cursive-ai">AI</span>
+              <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                <path d="M2 12h20"/>
+              </svg>
+              <span class="stamp-text">VISITED</span>
             </div>
           </div>
         </section>
@@ -177,7 +187,12 @@ HTML
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <div class="passport-stamp stamp-orange">
-              <span class="stamp-cursive-ai">AI</span>
+              <svg class="globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                <path d="M2 12h20"/>
+              </svg>
+              <span class="stamp-text">VISITED</span>
             </div>
           </div>
         </section>
