@@ -1,14 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
   const stopCards = document.querySelectorAll('.stop-card');
   const carMarker = document.getElementById('car-marker');
+  const trackNodes = document.querySelectorAll('.track-node');
   const polaroidCard = document.getElementById('polaroid-card');
+  
   const imgA = document.getElementById('photo-a');
   const imgB = document.getElementById('photo-b');
   const caption = document.getElementById('polaroid-caption');
+  const stamp = document.getElementById('passport-stamp');
+  const stampLocation = document.getElementById('stamp-location');
+
+  // Back-face details
+  const backTime = document.getElementById('back-time');
+  const backReqs = document.getElementById('back-reqs');
+  const backTakeaway = document.getElementById('back-takeaway');
 
   let activeIndex = -1;
 
-  function updatePolaroid(newImageSrc, newCaptionText, tiltDirection) {
+  // 3D Card Flip Handler
+  polaroidCard.addEventListener('click', () => {
+    polaroidCard.classList.toggle('is-flipped');
+  });
+
+  // Click-to-Jump Navigation Handler
+  trackNodes.forEach((node) => {
+    node.addEventListener('click', (e) => {
+      const jumpIndex = node.getAttribute('data-jump');
+      const targetCard = document.getElementById(`stop-${jumpIndex}`);
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  });
+
+  function updatePolaroid(card) {
+    const newImageSrc = card.getAttribute('data-image');
+    const newCaptionText = card.getAttribute('data-caption');
+    const tiltDirection = card.getAttribute('data-tilt');
+
+    // Update Back-Face details
+    backTime.textContent = card.getAttribute('data-time');
+    backReqs.textContent = card.getAttribute('data-reqs');
+    backTakeaway.textContent = card.getAttribute('data-takeaway');
+
     const activeImg = imgA.classList.contains('active') ? imgA : imgB;
     const nextImg = activeImg === imgA ? imgB : imgA;
 
@@ -24,6 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
     nextImg.src = newImageSrc;
     activeImg.classList.remove('active');
     nextImg.classList.add('active');
+
+    // Passport Stamp Animation
+    stamp.classList.remove('stamped');
+    setTimeout(() => {
+      const cityName = newCaptionText.split(':')[1]?.split(',')[0]?.trim() || 'VISITED';
+      stampLocation.textContent = cityName;
+      stamp.classList.add('stamped');
+    }, 300);
   }
 
   const observerOptions = {
@@ -44,13 +86,20 @@ document.addEventListener('DOMContentLoaded', () => {
           stopCards.forEach((c) => c.classList.remove('active'));
           card.classList.add('active');
 
+          // Update Track Nodes Active State
+          trackNodes.forEach((node, i) => {
+            if (i <= activeIndex) {
+              node.classList.add('active');
+            } else {
+              node.classList.remove('active');
+            }
+          });
+
+          // Move Car Marker
           const progressPercent = (activeIndex / (stopCards.length - 1)) * 100;
           carMarker.style.top = `${progressPercent}%`;
 
-          const newImg = card.getAttribute('data-image');
-          const newCap = card.getAttribute('data-caption');
-          const tilt = card.getAttribute('data-tilt');
-          updatePolaroid(newImg, newCap, tilt);
+          updatePolaroid(card);
         }
       }
     });
