@@ -1,15 +1,9 @@
 :root {
-  /* Transparency/Main colors */
-  --scroller-bg: transparent; /* Keep background transparent */
   --text-main: #1f2937;
-  --text-muted: #6b7280;
+  --text-muted: #4b5563;
   --polaroid-white: #ffffff;
-  
-  /* Color Palette Swatches (from Image 0) */
-  --accent-color: #2563eb; /* Active/Button (Blue 100) */
-  --accent-glow: rgba(171, 185, 255, 0.6); /* Button Hover Glow (Indigo 40) */
-  --track-active: #2563eb; /* Progress (Blue 100) */
-  --track-bg: #e2e8f0; /* Default Track (from UI sample) */
+  --accent-color: #2563eb;
+  --accent-glow: rgba(171, 185, 255, 0.7);
 }
 
 * {
@@ -21,7 +15,8 @@
 body {
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
-  background-color: transparent; /* Must be transparent for parent bleed-through */
+  background-color: transparent;
+  color: var(--text-main);
 }
 
 .roadtrip-scroller-main {
@@ -30,50 +25,65 @@ body {
   width: 100%;
 }
 
-/* NOISE FILTER (Sample 2 style) */
-.noise-overlay {
-  position: absolute;
+/* 1. GRAINY MESH GRADIENT BACKGROUND SPLOTCHES */
+.roadtrip-scroller-main::before {
+  content: "";
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  filter: url(#noise); /* Applies SVG filter */
-  opacity: 0.12; /* Adjust noise intensity here (0.0 - 1.0) */
-  pointer-events: none; /* Allows clicks to pass through */
-  z-index: 10; /* Keeps texture above main content */
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(255, 134, 161, 0.45) 0%, transparent 45%),
+    radial-gradient(circle at 85% 30%, rgba(171, 185, 255, 0.5) 0%, transparent 50%),
+    radial-gradient(circle at 50% 75%, rgba(255, 230, 90, 0.4) 0%, transparent 45%),
+    radial-gradient(circle at 80% 85%, rgba(255, 110, 80, 0.35) 0%, transparent 40%);
+  filter: blur(60px);
+  pointer-events: none;
 }
 
-/* Define the noise filter off-screen so it works in the DOM but is hidden */
+/* NOISE OVERLAY */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  filter: url(#noise);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 10;
+}
+
 .noise-filter {
   position: absolute;
   width: 0;
   height: 0;
-  overflow: hidden;
 }
 
-/* 2-Column Layout Grid */
+/* LAYOUT GRID */
 .roadtrip-grid {
   display: flex;
   max-width: 1100px;
   margin: 0 auto;
   position: relative;
-  z-index: 1; /* Puts content below noise texture */
+  z-index: 1;
 }
 
-/* Left Column: Scrollable Content */
 .content-stream {
   position: relative;
   width: 55%;
-  padding: 100px 40px 150px 60px;
+  padding: 80px 40px 150px 70px;
 }
 
-/* Vertical Track & Moving Car Icon */
+/* ROUTE TRACK & PROMINENT TOP-DOWN CAR */
 .route-track {
   position: absolute;
   top: 100px;
   bottom: 150px;
-  left: 24px;
-  width: 20px;
+  left: 20px;
+  width: 30px;
 }
 
 .track-line {
@@ -82,35 +92,45 @@ body {
   bottom: 0;
   left: 50%;
   width: 3px;
-  background-color: var(--track-bg); /* Use pale lime from sample */
+  background: repeating-linear-gradient(to bottom, #1f2937 0 8px, transparent 8px 16px);
   transform: translateX(-50%);
-  border-radius: 2px;
 }
 
+/* Prominent Vehicle Container */
 .car-marker {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 32px;
-  height: 32px;
-  color: var(--track-active); /* Active color (Blue 100) */
-  background: white; /* Car bubble */
-  border: 2px solid var(--track-bg);
-  border-radius: 50%;
-  padding: 4px;
+  width: 54px; /* Larger vehicle profile */
+  height: 90px;
   transform: translate(-50%, -50%);
-  transition: top 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.06);
+  transition: top 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15));
 }
 
-/* Stop Cards Structure */
+.car-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* LINE ART CITY SKYLINE CONTAINERS */
+.city-skyline-art {
+  width: 100%;
+  max-width: 380px;
+  height: 80px;
+  margin-bottom: 16px;
+  color: #1f2937;
+  opacity: 0.85;
+}
+
+/* STOP CARDS */
 .stop-card {
-  min-height: 80vh;
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  opacity: 0.35;
-  transform: translateY(15px);
+  opacity: 0.3;
+  transform: translateY(20px);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
@@ -125,15 +145,14 @@ body {
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--accent-color); /* Brightest color from sample */
-  margin-bottom: 8px;
+  color: var(--accent-color);
+  margin-bottom: 6px;
 }
 
 .stop-card h2 {
   font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 12px;
-  color: #111827;
 }
 
 .stop-card p {
@@ -143,40 +162,28 @@ body {
   margin-bottom: 28px;
 }
 
-/* Modern Glowing Action Button (Image 0 style + Hover Glow) */
+/* BUTTONS */
 .start-btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   align-self: flex-start;
   padding: 14px 28px;
-  background-color: var(--accent-color); /* Main active blue */
+  background-color: var(--accent-color);
   color: #ffffff;
   text-decoration: none;
   font-weight: 600;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.start-btn svg {
-  width: 18px;
-  height: 18px;
-  transition: transform 0.3s ease;
-}
-
 .start-btn:hover {
-  background-color: #1a51c9; /* Slightly darker Blue 100 for contrast */
   transform: translateY(-2px);
-  /* The Indigo 40 Glow from sample 1 */
-  box-shadow: 0 0 20px var(--accent-glow); 
+  box-shadow: 0 0 22px var(--accent-glow);
 }
 
-.start-btn:hover svg {
-  transform: translateX(5px);
-}
-
-/* Right Column: Sticky Polaroid Frame */
+/* POLAROID STAGE */
 .stage-wrapper {
   width: 45%;
   position: sticky;
@@ -189,40 +196,38 @@ body {
 }
 
 .polaroid-card {
-  --tilt-angle: -3deg;
+  --tilt-angle: -3.5deg;
   position: relative;
-  width: 320px;
+  width: 330px;
   background: var(--polaroid-white);
-  padding: 16px 16px 26px 16px;
-  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.12), 0 8px 12px -6px rgba(0, 0, 0, 0.05);
-  transform: rotate(var(--tilt-angle)) translateZ(0);
+  padding: 18px 18px 28px 18px;
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.18);
+  transform: rotate(var(--tilt-angle));
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
-  will-change: transform, box-shadow;
 }
 
 .polaroid-card:hover {
-  transform: rotate(calc(var(--tilt-angle) * 0.2)) translateY(-10px) scale(1.02);
-  box-shadow: 0 25px 50px -5px rgba(0, 0, 0, 0.18), 0 12px 18px -6px rgba(0, 0, 0, 0.08);
+  transform: rotate(calc(var(--tilt-angle) * 0.2)) translateY(-8px) scale(1.02);
+  box-shadow: 0 30px 60px -5px rgba(0, 0, 0, 0.25);
 }
 
 .tape-strip {
   position: absolute;
   top: -12px;
   left: 50%;
-  width: 90px;
-  height: 26px;
-  background-color: rgba(243, 238, 217, 0.7);
-  border: 1px solid rgba(210, 200, 170, 0.3);
+  width: 95px;
+  height: 28px;
+  background-color: rgba(255, 238, 180, 0.75);
+  border: 1px solid rgba(220, 200, 140, 0.4);
   transform: translateX(-50%) rotate(-1.5deg);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(2px);
 }
 
 .polaroid-photo-frame {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  background-color: #f1f5f9;
+  background-color: #e2e8f0;
   overflow: hidden;
 }
 
@@ -234,8 +239,8 @@ body {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transform: scale(1.1); /* Slight pre-zoom */
-  transition: opacity 0.6s ease-in-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.08);
+  transition: opacity 0.6s ease-in-out, transform 0.8s ease;
 }
 
 .polaroid-img.active {
@@ -246,24 +251,7 @@ body {
 .polaroid-caption {
   margin-top: 18px;
   font-family: 'Caveat', cursive;
-  font-size: 1.45rem;
-  color: #1f2937;
+  font-size: 1.5rem;
+  color: #111827;
   text-align: center;
-  transition: opacity 0.3s ease;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .roadtrip-grid {
-    flex-direction: column-reverse;
-  }
-  .content-stream {
-    width: 100%;
-    padding: 20px;
-  }
-  .stage-wrapper {
-    position: relative;
-    width: 100%;
-    height: 400px;
-  }
 }
