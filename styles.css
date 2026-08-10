@@ -1,3 +1,13 @@
+Using custom PNGs or GIFs for the cityscapes is a fantastic approach. An image/GIF asset gives you complete creative freedom over line thickness, detail, and custom branding compared to inline SVG code.
+
+Using an airplane instead of a car also fits the international travel theme far better, making the progression feel like a flight path across stops.
+
+Regarding the iframe issue in Docebo: you are entirely right to be cautious. Full-screen fixed CSS backgrounds can clip unpredictably or cause scrollbar glitches when forced into an iframe. Replacing the screen-wide background with localized, floating blob accents pinned inside the container solves this completely—keeping the design contained while preserving the soft, grainy look.
+
+Here is the updated code reflecting all three changes:
+
+Updated styles.css
+CSS
 :root {
   --text-main: #1f2937;
   --text-muted: #4b5563;
@@ -19,39 +29,57 @@ body {
   color: var(--text-main);
 }
 
+/* Contain everything strictly inside the scroller container */
 .roadtrip-scroller-main {
   position: relative;
-  min-height: 100vh;
   width: 100%;
+  min-height: 100vh;
+  overflow: hidden; /* Prevents background blobs from leaking scrollbars into Docebo */
 }
 
-/* 1. GRAINY MESH GRADIENT BACKGROUND SPLOTCHES */
-.roadtrip-scroller-main::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  background: 
-    radial-gradient(circle at 15% 20%, rgba(255, 134, 161, 0.45) 0%, transparent 45%),
-    radial-gradient(circle at 85% 30%, rgba(171, 185, 255, 0.5) 0%, transparent 50%),
-    radial-gradient(circle at 50% 75%, rgba(255, 230, 90, 0.4) 0%, transparent 45%),
-    radial-gradient(circle at 80% 85%, rgba(255, 110, 80, 0.35) 0%, transparent 40%);
-  filter: blur(60px);
+/* LOCALIZED GRAINY GRADIENT BLOBS (Contained inside iframe bounds) */
+.blob-accent {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
   pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
 }
 
-/* NOISE OVERLAY */
+.blob-1 {
+  top: 5%;
+  left: -50px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, #ff86a1 0%, transparent 70%);
+}
+
+.blob-2 {
+  top: 45%;
+  right: -40px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #abb9ff 0%, transparent 70%);
+}
+
+.blob-3 {
+  bottom: 5%;
+  left: 10%;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, #ffed0e 0%, transparent 70%);
+}
+
+/* NOISE OVERLAY (Contained inside main element) */
 .noise-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   filter: url(#noise);
-  opacity: 0.18;
+  opacity: 0.15;
   pointer-events: none;
   z-index: 10;
 }
@@ -77,7 +105,7 @@ body {
   padding: 80px 40px 150px 70px;
 }
 
-/* ROUTE TRACK & PROMINENT TOP-DOWN CAR */
+/* ROUTE TRACK & AIRPLANE MARKER */
 .route-track {
   position: absolute;
   top: 100px;
@@ -91,36 +119,42 @@ body {
   top: 0;
   bottom: 0;
   left: 50%;
-  width: 3px;
-  background: repeating-linear-gradient(to bottom, #1f2937 0 8px, transparent 8px 16px);
+  width: 2px;
+  background: repeating-linear-gradient(to bottom, #2563eb 0 8px, transparent 8px 16px);
   transform: translateX(-50%);
 }
 
-/* Prominent Vehicle Container */
-.car-marker {
+/* Airplane Marker Styling */
+.plane-marker {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 54px; /* Larger vehicle profile */
-  height: 90px;
+  width: 48px;
+  height: 48px;
+  color: var(--accent-color);
+  background: #ffffff;
+  border: 2px solid var(--accent-color);
+  border-radius: 50%;
+  padding: 8px;
   transform: translate(-50%, -50%);
   transition: top 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-  filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15));
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
-.car-svg {
+.plane-svg {
   width: 100%;
   height: 100%;
 }
 
-/* LINE ART CITY SKYLINE CONTAINERS */
-.city-skyline-art {
+/* CITY IMAGE / GIF CONTAINER */
+.city-graphic {
   width: 100%;
-  max-width: 380px;
-  height: 80px;
+  max-width: 320px;
+  height: auto;
+  max-height: 110px;
+  object-fit: contain;
   margin-bottom: 16px;
-  color: #1f2937;
-  opacity: 0.85;
+  display: block;
 }
 
 /* STOP CARDS */
