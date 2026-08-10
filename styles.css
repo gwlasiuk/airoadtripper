@@ -205,26 +205,28 @@ body {
 
 .start-btn:hover { transform: translateY(-2px); }
 
-/* RUBBER PASSPORT STAMP (Styled inline or ready for PNG) */
+/* CURSIVE 'AI' PASSPORT STAMP (Hidden until button is clicked) */
 .passport-stamp {
   display: inline-flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 76px;
-  height: 76px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  border: 3px dashed currentColor;
-  padding: 6px;
-  transform: rotate(-12deg);
-  opacity: 0.3;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  border: 3px stroke currentColor;
+  border-style: double;
+  padding: 4px;
+  transform: scale(0.3) rotate(-25deg);
+  opacity: 0; /* Hidden by default */
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
   user-select: none;
+  pointer-events: none;
 }
 
-.stop-card.active .passport-stamp {
-  opacity: 0.9;
-  transform: rotate(-8deg) scale(1.05);
+/* REVEALED STAMP STATE */
+.passport-stamp.stamped {
+  opacity: 0.95;
+  transform: scale(1) rotate(-12deg);
 }
 
 .stamp-coral { color: var(--c-coral); }
@@ -233,37 +235,15 @@ body {
 .stamp-turquoise { color: #00b388; }
 .stamp-orange { color: var(--c-orange); }
 
-.stamp-title {
-  font-size: 0.55rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.stamp-city {
-  font-size: 0.75rem;
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  line-height: 1;
-  margin: 2px 0;
-}
-
-.stamp-status {
-  font-size: 0.5rem;
+.stamp-cursive-ai {
+  font-family: 'Caveat', cursive;
+  font-size: 2.3rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
-  border-top: 1px stroke currentColor;
-  padding-top: 2px;
+  line-height: 1;
+  margin-top: -4px;
 }
 
-/* Optional Stamp PNG image overlay */
-.stamp-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* FIX: FIXED PERSPECTIVE & POLAROID FLIP CARD SETUP */
+/* STAGE & POLAROID SETUP */
 .stage-wrapper {
   width: 45%;
   position: sticky;
@@ -278,7 +258,7 @@ body {
 .polaroid-card-container {
   width: 330px;
   height: 440px;
-  perspective: 1200px; /* Perspective MUST be on wrapper */
+  perspective: 1200px;
 }
 
 .polaroid-card {
@@ -292,7 +272,6 @@ body {
   cursor: pointer;
 }
 
-/* Flip state */
 .polaroid-card.is-flipped {
   transform: rotate(var(--tilt-angle)) rotateY(180deg);
 }
@@ -306,8 +285,6 @@ body {
   background: var(--polaroid-white);
   padding: 18px 18px 24px 18px;
   box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.18);
-  
-  /* CRITICAL FIX FOR BLEED-THROUGH BUG */
   -webkit-backface-visibility: hidden !important;
   backface-visibility: hidden !important;
   border-radius: 4px;
