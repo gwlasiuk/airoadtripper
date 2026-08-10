@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>International Learning Journey</title>
+  <title>International Flight Journey</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,12 @@
 
   <div class="roadtrip-scroller-main">
     
-    <!-- SVG Grain/Noise Texture -->
+    <!-- Contained Grainy Gradient Blobs -->
+    <div class="blob-accent blob-1"></div>
+    <div class="blob-accent blob-2"></div>
+    <div class="blob-accent blob-3"></div>
+
+    <!-- Noise Texture Overlay -->
     <div class="noise-overlay"></div>
     <svg class="noise-filter" xmlns="http://www.w3.org/2000/svg">
       <filter id="noise">
@@ -29,30 +34,21 @@
       <!-- LEFT SIDE: Content Stream -->
       <div class="content-stream" id="content-stream">
         
-        <!-- Track & Prominent Top-Down Car SVG -->
+        <!-- Track & Airplane Icon -->
         <div class="route-track">
           <div class="track-line"></div>
-          <div class="car-marker" id="car-marker">
-            <!-- Top-down Line Art Car -->
-            <svg class="car-svg" viewBox="0 0 60 100" fill="none" stroke="#1f2937" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="10" y="10" width="40" height="80" rx="12" fill="#ffffff" />
-              <!-- Windshield & Rear Window -->
-              <path d="M16 32 C16 22, 44 22, 44 32 L40 42 L20 42 Z" fill="#f1f5f9"/>
-              <path d="M18 72 C18 66, 42 66, 42 72 L38 80 L22 80 Z" fill="#f1f5f9"/>
-              <!-- Roof & Side Mirrors -->
-              <rect x="20" y="44" width="20" height="20" rx="3" />
-              <path d="M6 30 L10 32 M54 30 L50 32" stroke-width="3"/>
+          <div class="plane-marker" id="car-marker">
+            <!-- Line Art Airplane SVG -->
+            <svg class="plane-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3.5c-.5-.5-2.5 0-4 1.5L13.5 8.5 5.3 6.7c-.8-.2-1.6.2-2 .9-.4.7-.2 1.6.4 2.1l4.8 3.8-3 3-1.8-.6c-.5-.2-1 .1-1.2.6s0 1 .4 1.2l2.3 1.5 1.5 2.3c.2.4.7.6 1.2.4.5-.2.8-.7.6-1.2l-.6-1.8 3-3 3.8 4.8c.5.6 1.4.8 2.1.4.7-.4 1.1-1.2.9-2z"/>
             </svg>
           </div>
         </div>
 
         <!-- Stop 1: Paris -->
         <section class="stop-card active" data-stop="0" data-image="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=800&h=800&auto=format&fit=crop" data-caption="Stop 1: Paris, France" data-tilt="left">
-          <!-- Paris Line Art Skyline SVG -->
-          <svg class="city-skyline-art" viewBox="0 0 400 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Eiffel Tower & Buildings -->
-            <path d="M 10 75 L 390 75 M 160 75 L 180 20 L 185 10 L 190 20 L 210 75 M 172 45 L 198 45 M 166 62 L 204 62 M 30 75 L 30 50 L 60 50 L 60 75 M 70 75 L 70 40 L 110 40 L 110 75 M 260 75 L 260 48 L 300 48 L 300 75 M 320 75 L 320 55 L 360 55 L 360 75" />
-          </svg>
+          <!-- Place your own PNG or GIF here -->
+          <img class="city-graphic" src="https://api.iconify.design/lucide:building-2.svg" alt="Paris Skyline" />
           <span class="city-tag">Stop 01 • Paris, FR</span>
           <h2>Foundations in Paris</h2>
           <p>Begin your global learning tour in the heart of Europe. We lay down core principles and project architecture before traveling across the map.</p>
@@ -64,11 +60,8 @@
 
         <!-- Stop 2: London -->
         <section class="stop-card" data-stop="1" data-image="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=800&h=800&auto=format&fit=crop" data-caption="Stop 2: London, UK" data-tilt="right">
-          <!-- London Line Art Skyline SVG -->
-          <svg class="city-skyline-art" viewBox="0 0 400 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Big Ben & London Eye -->
-            <path d="M 10 75 L 390 75 M 60 75 L 60 25 L 70 15 L 80 25 L 80 75 M 55 35 L 85 35 M 200 75 A 25 25 0 0 1 200 25 A 25 25 0 0 1 200 75 M 200 50 L 200 75 M 280 75 L 280 40 L 330 40 L 330 75" />
-          </svg>
+          <!-- Place your own PNG or GIF here -->
+          <img class="city-graphic" src="https://api.iconify.design/lucide:landmark.svg" alt="London Skyline" />
           <span class="city-tag">Stop 02 • London, UK</span>
           <h2>Building in London</h2>
           <p>Crossing the channel into intermediate skill sets. Here we address collaboration, real-time decision making, and team workflow strategies.</p>
@@ -80,11 +73,8 @@
 
         <!-- Stop 3: Tokyo -->
         <section class="stop-card" data-stop="2" data-image="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=800&h=800&auto=format&fit=crop" data-caption="Stop 3: Tokyo, Japan" data-tilt="left">
-          <!-- Tokyo Line Art Skyline SVG -->
-          <svg class="city-skyline-art" viewBox="0 0 400 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Skytree / Mt Fuji & Tower -->
-            <path d="M 10 75 L 390 75 M 80 75 L 120 40 L 160 75 M 280 75 L 290 15 L 295 5 L 300 15 L 310 75 M 275 45 L 315 45 M 20 75 L 20 50 L 50 50 L 50 75 M 190 75 L 190 35 L 230 35 L 230 75" />
-          </svg>
+          <!-- Place your own PNG or GIF here -->
+          <img class="city-graphic" src="https://api.iconify.design/lucide:castle.svg" alt="Tokyo Skyline" />
           <span class="city-tag">Stop 03 • Tokyo, JP</span>
           <h2>Mastery in Tokyo</h2>
           <p>Our final destination highlights advanced scaling, system optimization, and high-performance execution to complete your certificate path.</p>
