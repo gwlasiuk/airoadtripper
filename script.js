@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let activeIndex = -1;
 
-  // 1. CLICK-TO-STAMP: Reveal the 'AI' stamp when 'Start Learning' is clicked
+  // 1. Mark stamp as 'VISITED' on button click
   startBtns.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
       const parentRow = btn.closest('.action-row');
       const stamp = parentRow?.querySelector('.passport-stamp');
       if (stamp) {
@@ -26,12 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3D Card Flip Handler
+  // 2. 3D Card Flip Handler
   polaroidCard.addEventListener('click', () => {
     polaroidCard.classList.toggle('is-flipped');
   });
 
-  // Click-to-Jump Navigation Handler
+  // 3. Click-to-Jump Navigation Handler
   trackNodes.forEach((node) => {
     node.addEventListener('click', () => {
       const jumpIndex = node.getAttribute('data-jump');
