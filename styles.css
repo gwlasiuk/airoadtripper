@@ -177,11 +177,11 @@ body {
   margin-bottom: 24px;
 }
 
-/* ACTION ROW: BUTTON + PASSPORT STAMP */
+/* ACTION ROW: BUTTON + GLOBE PASSPORT STAMP */
 .action-row {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
@@ -205,43 +205,46 @@ body {
 
 .start-btn:hover { transform: translateY(-2px); }
 
-/* CURSIVE 'AI' PASSPORT STAMP (Hidden until button is clicked) */
+/* GLOBE PASSPORT BADGE STAMP */
 .passport-stamp {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  border: 3px stroke currentColor;
-  border-style: double;
-  padding: 4px;
-  transform: scale(0.3) rotate(-25deg);
-  opacity: 0; /* Hidden by default */
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: 2px stroke currentColor;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transform: rotate(-3deg);
+  opacity: 0.35; /* Faded/Outline when unvisited */
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   user-select: none;
-  pointer-events: none;
 }
 
-/* REVEALED STAMP STATE */
+.globe-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.stamp-coral { color: var(--c-coral); border-color: var(--c-coral); }
+.stamp-lime { color: #6b8800; border-color: #6b8800; }
+.stamp-indigo { color: var(--c-indigo); border-color: var(--c-indigo); }
+.stamp-turquoise { color: #00b388; border-color: #00b388; }
+.stamp-orange { color: var(--c-orange); border-color: var(--c-orange); }
+
+/* VISITED STATE (Triggered on Button Click) */
 .passport-stamp.stamped {
-  opacity: 0.95;
-  transform: scale(1) rotate(-12deg);
+  opacity: 1;
+  transform: rotate(-1deg) scale(1.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.stamp-coral { color: var(--c-coral); }
-.stamp-lime { color: #6b8800; }
-.stamp-indigo { color: var(--c-indigo); }
-.stamp-turquoise { color: #00b388; }
-.stamp-orange { color: var(--c-orange); }
-
-.stamp-cursive-ai {
-  font-family: 'Caveat', cursive;
-  font-size: 2.3rem;
-  font-weight: 700;
-  line-height: 1;
-  margin-top: -4px;
-}
+.stamp-coral.stamped { background-color: var(--c-coral); color: #ffffff; }
+.stamp-lime.stamped { background-color: var(--c-lime); color: #1f2937; }
+.stamp-indigo.stamped { background-color: var(--c-indigo); color: #ffffff; }
+.stamp-turquoise.stamped { background-color: var(--c-turquoise); color: #1f2937; }
+.stamp-orange.stamped { background-color: var(--c-orange); color: #ffffff; }
 
 /* STAGE & POLAROID SETUP */
 .stage-wrapper {
