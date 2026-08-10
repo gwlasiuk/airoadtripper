@@ -334,15 +334,6 @@ body {
   text-align: center;
 }
 
-.flip-hint {
-  font-size: 0.725rem;
-  color: var(--text-muted);
-  text-align: center;
-  margin-top: auto;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
 /* BACK FACE */
 .polaroid-back {
   transform: rotateY(180deg);
