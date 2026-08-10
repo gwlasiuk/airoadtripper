@@ -3,17 +3,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const carMarker = document.getElementById('car-marker');
   const trackNodes = document.querySelectorAll('.track-node');
   const polaroidCard = document.getElementById('polaroid-card');
+  const startBtns = document.querySelectorAll('.start-btn');
   
   const imgA = document.getElementById('photo-a');
   const imgB = document.getElementById('photo-b');
   const caption = document.getElementById('polaroid-caption');
 
-  // Back-face detail elements
   const backTime = document.getElementById('back-time');
   const backReqs = document.getElementById('back-reqs');
   const backTakeaway = document.getElementById('back-takeaway');
 
   let activeIndex = -1;
+
+  // 1. CLICK-TO-STAMP: Reveal the 'AI' stamp when 'Start Learning' is clicked
+  startBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const parentRow = btn.closest('.action-row');
+      const stamp = parentRow?.querySelector('.passport-stamp');
+      if (stamp) {
+        stamp.classList.add('stamped');
+      }
+    });
+  });
 
   // 3D Card Flip Handler
   polaroidCard.addEventListener('click', () => {
@@ -36,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const newCaptionText = card.getAttribute('data-caption');
     const tiltDirection = card.getAttribute('data-tilt');
 
-    // Update Back-Face details
     backTime.textContent = card.getAttribute('data-time');
     backReqs.textContent = card.getAttribute('data-reqs');
     backTakeaway.textContent = card.getAttribute('data-takeaway');
@@ -76,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
           stopCards.forEach((c) => c.classList.remove('active'));
           card.classList.add('active');
 
-          // Update Track Nodes
           trackNodes.forEach((node, i) => {
             if (i <= activeIndex) {
               node.classList.add('active');
@@ -85,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           });
 
-          // Move Car Marker
           const progressPercent = (activeIndex / (stopCards.length - 1)) * 100;
           carMarker.style.top = `${progressPercent}%`;
 
